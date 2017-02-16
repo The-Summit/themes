@@ -1,0 +1,22 @@
+{% extends "base.twig" %}
+{% block source %}archive-press.twig{% endblock %}
+{% block content %}
+<div class="content-nav-padding">
+		<h1 class="col-xs-10 offset15">
+			The Summit in the Press
+		</h1>
+	<div class="col-md-10 col-md-offset-1">
+	{% for post in posts if post.parent==0 %}
+		<div class="media">		
+			<a class="media-left" href="{{post.url}}">
+				{%if post.thumbnail %}<img class="img-responsive" src="{{post.thumbnail}}" />{% endif %}
+			</a>
+			<div class="media-body">
+				<h4 class="media-heading"><a href="{{post.url}}">{{post.title}}</a></h4>
+				{% if post.post_excerpt %}<em>"{{post.post_excerpt}}" ({{post.article_date|date("M d, Y")}})</em>{% endif %}
+			</div>
+		</div>			
+	{% endfor %}
+	</div>
+</div>
+{% endblock %}

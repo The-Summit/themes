@@ -1,0 +1,26 @@
+<style>
+	.{{post.post_type ~ loop.index}}.bg{
+		background-image: url('{{ post.background_image.src|better_resize(767) }}');
+	}
+	@media (min-width: 768px) {
+		.{{post.post_type ~ loop.index}}.bg{
+			background-image: url('{{ post.background_image.src|better_resize(991) }}');
+		}
+	}
+	@media (min-width: 992px) {
+		.{{post.post_type ~ loop.index}}.bg{
+			background-image: url('{{ post.background_image.src|better_resize(1199) }}');
+		}
+	}
+	@media (min-width: 1200px) {
+		.{{post.post_type ~ loop.index}}.bg{
+			background-image: url('{{ post.background_image.src|better_resize(1400) }}');
+		}
+	}
+	@media (min-width: 1900px) {
+		.{{post.post_type ~ loop.index}}.bg{
+			background-image: url('{{ post.background_image.src|better_resize(2000) }}');
+		}
+	}
+</style>
+<div class="bg {{post.post_type ~ loop.index}}" data-0="top:0%" data-100p="top:-130%;"></div>

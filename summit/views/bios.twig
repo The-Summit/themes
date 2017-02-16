@@ -1,0 +1,15 @@
+<article class="post-type-{{post.post_type}}" id="post-{{post.ID}}">
+	<section class="article-content">
+		<div class="row" itemscope itemtype="http://data-vocabulary.org/Person>
+			<div class="col-xs-6 col-md-3 col-md-offset-2">
+				<img src="{{post.thumbnail.get_src|better_resize(400,400)}}" class="avatar img-responsive"/>
+				<span class="hidden" itemprop="photo">{{post.thumbnail.get_src|better_resize(400,400)}}</span>
+				<span class="hidden" itemprop="org">The Summit</span>
+			</div>
+				<h2 itemprop="name">{{post.title}}</h2>
+				<div class="article-body col-md-5">
+					{{post.get_content}}
+				</div>
+		</div>
+	</section>
+</article>

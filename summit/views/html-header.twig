@@ -1,0 +1,15 @@
+<!doctype html>
+<html class="{% block htmlclass %}bg-blank{% endblock %}">
+<head>
+    <title>{{function("wp_title","")}}</title>
+    <link rel="stylesheet" href="{{bloginfo('template_directory')}}/style.{{function('get_option','cssver')}}.css" type="text/css" media="screen" />
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">	
+	<script type="text/javascript">
+		var assets = "{{bloginfo('template_directory')}}",
+			home = "{{bloginfo('url')}}";
+	</script>
+	<link href='http://fonts.googleapis.com/css?family=Roboto:400,300,900' rel='stylesheet' type='text/css'>
+	{{ function('wp_head') }}
+</head>

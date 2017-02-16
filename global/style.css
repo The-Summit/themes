@@ -1,0 +1,96 @@
+/*
+ Theme Name:   Passport: Global Education
+ Description:  The Summit Child Theme
+ Author:       Spencer Mize
+ Template:     summit
+ Version:      1.0.0
+*/
+
+html{
+	background-image: none;
+}
+h1,h2,h3,h4,h5{
+	text-transform: none;
+}
+h2{
+	clear: both;
+	color: rgb(23,120,173);
+	font-size: 44px;
+}
+small{
+	display: block;
+	margin-top: 5px;
+}
+hr{
+	margin-bottom: 60px;
+    background: rgba(247,148,30,0.9);
+    background: -webkit-gradient(linear, 0% 50%, 100% 50%, color-stop(0%, #ffffff),color-stop(50%, rgba(23,120,173,0.9)),color-stop(100%, #ffffff));
+    background: -moz-linear-gradient(left, #ffffff,rgba(23,120,173,0.9),#ffffff);
+    background: -webkit-linear-gradient(left, #ffffff,rgba(23,120,173,0.9),#ffffff);
+    background: linear-gradient(to right, #ffffff,rgba(23,120,173,0.9),#ffffff);	
+}
+footer{
+	padding: 0 0 40px 0;
+}
+@media (min-width: 992px ) {
+	body{
+		font-size: 24px;
+	}
+}
+.navbar .navbar-nav .open .dropdown-menu{
+	opacity: 1;
+}
+@media (min-width: 992px){
+	.navbar .navbar-nav .open .dropdown-menu{
+		opacity: 1;
+	}
+}
+.gfield_description{
+	font-size: 16px;
+}
+.navbar-default,.btn-primary, .gform_wrapper .gform_button, .gform_wrapper .button {
+	background-color: rgba(23,120,173,0.9);
+	border-color: rgba(225,225,225,0.9);
+	color: #fff;	
+}
+
+.navbar{
+    box-shadow: 0px 0px 3px 1px #eee; 
+}
+.btn-primary:hover,.gform_wrapper .gform_button:hover{
+	background-color: rgba(247,148,30,0.9);
+	border-color: rgba(225,225,225,0.9);
+}
+.navbar .navbar-nav .open .dropdown-menu{
+	right: auto;
+}
+.gform_wrapper h2,.gform_wrapper .gform_title{
+	color: #03784b;
+}
+.gform_wrapper h3{
+	font-family: "Roboto",sans-serif;
+	font-weight: 700;
+	line-height: 1.1;
+	color: inherit;
+	font-size: 20px;
+	text-transform: none;
+}
+.accent, .caption h3{
+	color: rgb(23,120,173);
+}
+blockquote{
+	margin-top: 30px;
+	width: auto;
+	border-left: 10px solid #03784b;
+	background-color: rgb(248, 248, 248);
+}
+blockquote:after {
+	color: #f3c050;
+	content: '';
+}
+svg{
+	font-family: 'Roboto';
+}
+.home h1.accent{
+	display: none;
+}

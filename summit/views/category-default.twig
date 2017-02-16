@@ -1,0 +1,62 @@
+{% extends "base.twig" %}
+{% block source %}category-default.twig{% endblock %}
+{% block layout %}scroll{% endblock %}
+{% block content %}
+<div class="">
+	<div class="row main">
+		<img class="img-responsive" src="{{ cat.img|better_resize(2000) }}" />
+		<h1 class="col-xs-12 col-md-8 col-md-offset-2">
+			{% block description %}
+				**blank**
+			{% endblock %}
+		</h1>
+	</div>	
+	{% block postfilter %}
+		{% for child in cat.children %}
+			<style>
+				.row{{loop.index}}{
+					background-image: linear-gradient(rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.65)),url('{{ child.img|better_resize(767) }}');
+				}
+				@media (min-width: 768px) {
+					.row{{loop.index}}{
+						background-image: linear-gradient(rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.65)),url('{{ child.img|better_resize(991) }}');
+					}
+				}
+				@media (min-width: 992px) {
+					.row{{loop.index}}{
+						background-image: linear-gradient(rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.65)),url('{{ child.img|better_resize(1199) }}');
+					}
+				}
+				@media (min-width: 1200px) {
+					.row{{loop.index}}{
+						background-image: linear-gradient(rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.65)),url('{{ child.img|better_resize(1400) }}');
+					}
+				}
+				@media (min-width: 1900px) {
+					.row{{loop.index}}{
+						background-image: linear-gradient(rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.65)),url('{{ child.img|better_resize(2000) }}');
+					}
+				}
+			</style>			
+			<div id="row{{loop.index}}" class="row row{{loop.index}}">
+				<h2 class="col-xs-12 col-md-12">{{ child.name }} 
+					<small class="col-xs-12 col-md-8 col-md-offset-2"> {{ child.description }}</small>
+				</h2>
+			</div>
+			<div class="row examples">
+				<div class="col-md-8 col-md-offset-2">
+					{% for post in child.posts %}
+						<a href="/{{post.post_type}}#{{post.slug}}">
+							<img class="img-responsive" src="{{TimberImage(post.logo).src}}" />
+						</a>
+					{% endfor %}			
+				</div>
+			</div>
+		{% endfor %}
+	{% endblock %}
+	<div class="text-center">
+		<h2 class="base">Interested in learning more?</h2>
+		<h3><a href="/contact-us" class="btn btn-lg btn-primary">Reach Out! <span class="glyphicon glyphicon-chevron-right"></span></a></h3>
+	</div>
+</div>
+{% endblock %}

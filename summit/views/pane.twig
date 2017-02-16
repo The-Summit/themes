@@ -1,0 +1,28 @@
+<section id="{{post.post_name}}" class="full-panel row">
+	{% include ["full-page-bg.twig"] %}
+	<div class="caption col-xs-12">
+		<div class="row">
+		{%set width=12 %}
+		{%for chi in post.children if chi.post_type==post.post_type %}
+			{%if loop.index0==0 %}
+				{%set width=8 %}
+				<a href="{{post.link}}#{{chi.post_name}}" class="btn btn-primary btn-lg pull-right" style="margin-top: 28px;">
+					Explore <span class="glyphicon glyphicon-arrow-right"></span>
+				</a>
+			{% endif %}
+		{%endfor%}
+		{% if post.action_link %}
+			{%set width=8 %}
+			<a href="{{post.action_link}}" class="btn btn-primary btn-lg pull-right" style="margin-top: 28px;">
+				{{ post.action_text }} <span class="glyphicon glyphicon-arrow-right"></span>
+			</a>	
+		{% endif %}
+		<h3 class="col-xs-{{width}} ">{{post.title}}</h3>
+		</div>
+		{% if post.about %}
+			{{ post.about|wpautop }}
+		{% elseif post.content %}
+			{{ post.content|wpautop }}
+		{% endif %}
+	</div>
+</section>

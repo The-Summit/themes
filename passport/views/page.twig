@@ -1,0 +1,12 @@
+{% extends "base.twig" %}
+{% block content %}
+	<section class="content-nav-padding row">
+		<div class="col-xs-12">
+			<h1 class="accent col-md-offset-1 title">{{posts[0].title}}</h1>
+			<div class="col-md-offset-1 col-md-10">
+				{{ posts[0].content|wpautop }}
+			</div>
+		</div>
+	</section>
+{% endblock %}
+{% block source %}page.twig{% endblock %}

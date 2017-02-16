@@ -1,0 +1,55 @@
+{% extends "base.twig" %}
+{% block content %}
+<div class="page-room-configurator content-nav-padding">
+	<form class="col-md-3">
+		<h2>{{posts[0].title}}</h2>
+		<select id="chooser" class="form-control">
+			<option value="">--</option>
+		{% for property in properties %}
+			{% for i in 1..10 if property.get_field("layout_" ~ i ~ "_title")|length > 0 %}
+				{% if i == 1 %}
+					<optgroup label="{{property.title}}">
+				{% endif %}
+				
+				{% set template = "layout_" ~ i ~ "_title" %}
+				{%if property.get_field(template)|length > 0 %}<option value="{{property.post_name}}_{{i}}">{{ property.get_field(template) }}	</option>{% endif %}
+			{% endfor  %}
+			</optgroup>
+		{% endfor %}
+		</select>
+	<h3>Layout Information</h3>
+	<div class="keys">
+		{% set keycls = "key-item col-md-2" %}
+		{% set keys = ["tables","podiums","screens","seating"] %}
+		{% for n in keys %}
+			{% if loop.index is odd %}<div class="row">{% endif %}
+				<p class="col-md-4 col-lg-3"><strong>{{n|capitalize}}: </strong></p>
+				<div class="{{keycls}} {{n}}"></div>
+			{% if loop.index is even or loop.last %}</div>{% endif %}
+		{% endfor %}
+	</div>
+	{% for property in properties %}
+		{% for i in 1..10 if property.get_field("layout_" ~ i ~ "_capacity")|length > 0 %}		
+			<p class="hidden" data-type="property" data-variant="{{property.post_name}}_{{i}}"><strong>Capacity: </strong>{{property.get_field("layout_" ~ i ~ "_capacity")}}</p>
+			{% if property.amenities %}
+				<div class="hidden" data-type="property" data-variant="{{property.post_name}}_{{i}}">
+					<h3>Amenities</h3>
+					{{property.amenities}}
+				</div>
+			{% endif %}
+		{% endfor %}
+	{% endfor %}	
+	</form>
+	<ul class="svg-wrap col-md-9">
+	{% for property in properties %}
+		{% for i in 1..10 if property.get_field("layout_" ~ i ~ "_image")|length > 0 %}
+			<li class="hidden" data-type="property" data-name="{{property.post_name}}" data-variant="{{property.post_name}}_{{i}}" data-src="{{TimberImage(property.get_field("layout_" ~ i ~ "_image")).src}}">
+				
+			</li>
+		{% endfor %}
+	{% endfor %}
+	</ul>
+</div>
+{% endblock %}
+{% block source %}room-configurator.twig{% endblock %}
+{% block layout %}configurator{% endblock %}

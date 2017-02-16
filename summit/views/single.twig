@@ -1,0 +1,11 @@
+{% extends "base.twig" %}
+{% block source %}single.twig{% endblock %}
+
+{% block content %}
+	{% if posts[0].apply_now_link %}
+		{% include ["apply-now.twig"] %}
+	{% endif %}
+	{% for post in posts %}
+		{% include ["pane.twig"] %}
+	{% endfor %}
+{% endblock %}

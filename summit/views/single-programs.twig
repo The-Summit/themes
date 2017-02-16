@@ -1,0 +1,28 @@
+{% extends "base.twig" %}
+{% block source %}single.twig{% endblock %}
+
+{% block content %}
+	<div class="content-nav-padding row">
+		<div class="col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2">
+			{% if landing %}
+				<div class="row">
+					<div class="col-md-8 col-md-offset-2">
+						<img src="{{TimberImage(posts[0].background_image).src|better_resize(1400)}}" class="img-responsive" alt="{{TimberImage(post.logo).title}}"/>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-8 col-md-offset-2">
+						<img src="{{TimberImage(posts[0].logo).src|better_resize(1000)}}" class="img-responsive" alt="{{TimberImage(post.logo).title}}"/>
+					</div>
+				</div>
+				<div class="row">
+					{{landing.post_content|shortcodes}}
+				</div>
+			{% else %}
+				{% for post in posts %}
+					{{post.about}}
+				{% endfor %}
+			{% endif %}
+		</div>
+	</div>
+{% endblock %}

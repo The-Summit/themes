@@ -1,0 +1,14 @@
+{% extends "base.twig" %}
+{% block content %}
+	<section class="content-nav-padding row">
+		<div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+			<h2 class="accent">{{posts|length}} Search Results For: &quot;{{query}}&quot;</h2>
+			<ul>
+			{% for post in posts if post.post_type!='history'%}
+				<li><a href="{{post.link}}" class="lead">{{post.title}}</a></li>
+			{%endfor%}
+			</ul>
+		</div>
+	</section>
+{% endblock %}
+{% block source %}search.twig{% endblock %}

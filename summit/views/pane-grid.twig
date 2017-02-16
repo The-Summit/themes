@@ -1,0 +1,81 @@
+{% if not post.hidden %}
+<section id="{{post.post_name}}" class="col-sm-5 col-sm-offset-1 col-md-2 col-lg-4 flex-child {%if not post.logo %} text-caption {%endif%}">
+{% if post.video %}
+	<video autoplay loop preload="auto" src="{{post.get_field('video')}}"></video>
+{% endif %}
+<style>
+	#{{post.post_name}}:before{
+		{% if post.avatar %}
+			background-image:url({{TimberImage(post.avatar).src|better_resize(500)}});
+		{% elseif post.logo %}
+			background-image:url({{TimberImage(post.logo).src|better_resize(1000)}});
+		{% elseif post.title %}
+			content: "{{post.title}}"
+		{% endif %}
+	}
+	{% if post.background_image %}
+		{% set img = post.background_image %}
+	{% else %}
+		{% set img = post.thumbnail %}
+	{% endif %}
+	@media (min-width: 768px) {
+		#{{post.post_name}}:after{
+			background-image:url({{TimberImage(img).src|better_resize(700)}});
+		}
+	}
+	@media (min-width: 992px) {
+		#{{post.post_name}}:after{
+			background-image:url({{TimberImage(img).src|better_resize(900)}});
+		}
+	}
+	{% if not post.video %}
+	@media (min-width: 1200px) {
+		#{{post.post_name}}:after{
+			background-image:url({{TimberImage(img).src|better_resize(1200)}});
+		}
+	}
+	{%endif%}
+</style>
+	{% if post.landing_page %}
+		{% set website = post.link %}
+	{% else %}
+		{% set website = post.website %}
+	{% endif %}
+	{% if post.logo %}
+		<div class="row img-row">
+			<a target="_blank" href="{{website}}"><img src="{{TimberImage(post.logo).src|better_resize(1000)}}" class="img-responsive" alt="{{TimberImage(post.logo).title}}"/></a>
+		</div>
+	{% else %}
+		<div class="row text-row">
+			{{post.title}}
+		</div>
+	{% endif %}
+	{% set possible_meta = ["landing_page","website","building","layout_1_title","regular_hourly_rate","regular_half_day_rate","regular_full_day_rate","regular_nightly_rate","apply_now_link"] %}
+	{% set show_meta = false %}
+	{% for meta in possible_meta if post.get_field(meta)%}
+		{% set show_meta = true %}
+	{% endfor %}
+	<div class="col-xs-12 descriptor">
+		{% if show_meta %}
+			<div class="col-md-4">
+				{% set rates = {"hourly":post.regular_hourly_rate,"half-day":post.regular_half_day_rate,"full-day":post.regular_full_day_rate,"nightly":post.regular_nightly_rate} %}
+				{% if website %}<p class="truncate" data-toggle="tooltip" data-placement="top" title="{{website|replace({'http://':'','https://':'','www.':''})|trim("/")}}" ><strong>Web: </strong><br/><a target="_blank" href="{{website}}">{{website|replace({'http://':'','https://':'','www.':''})|trim("/")}}</a></p>{% endif %}
+				{% if post.apply_now_link %}<p class="truncate" data-toggle="tooltip" data-placement="top" title="{{post.apply_now_link|replace({'http://':'','https://':'','www.':''})|trim("/")}}" ><strong>Apply: </strong><br/><a target="_blank" href="{{post.apply_now_link}}">{{post.apply_now_link|replace({'http://':'','https://':'','www.':''})|trim("/")}}</a></p>{% endif %}
+				{% if post.building %} <p><strong>Where: </strong><br/><a href="/campus-map#b{{post.building.building_number}},{%if post.door %}d{{post.door}}{% endif %}">{{post.building.title}}</a></p>{% endif %}
+				{% for key,rate in rates%}
+					{% if rate %}<p class="rate"><strong>{{key}}:</strong> <a href="/contact-us?reason=rent&amp;property_name={{post.post_name}}">${{rate}}</a></p>{% endif %}
+				{% endfor %}		
+				{% if post.layout_1_title %}<p><strong>Layouts:</strong><br/><a href="/room-configurator#{{post.post_name}}_1">Configurator</a></p>{% endif %}
+				{% if rates["hourly"] > 0 or rates["nightly"] %}<a href="/contact-us?reason=rent&amp;property_name={{post.post_name}}" class="btn btn-primary">Contact to Book!</a>{% endif %}
+			</div>
+		{% endif %}
+		<div class="col-xs-12 {% if show_meta %}col-md-8{% else %}col-md-12{% endif %}">
+			{% if post.about %}
+				{{ post.about|wpautop }}
+			{% elseif post.content %}
+				{{ post.content|wpautop }}
+			{% endif %}
+		</div>
+	</div>
+</section>
+{% endif %}

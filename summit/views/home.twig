@@ -1,0 +1,17 @@
+{% extends "base.twig" %}
+{% block content %}
+	{% for cat in cats %}
+		{% for post in _context[cat] if post.get_field('background_image') %}
+			<div class="row full-panel {% if loop.index0==0 %} active {%endif%}">
+					{% include ["front-full-page-bg.twig"] %}
+					<a class="banner col-xs-12" href="{{post.link}}">
+						<h1>{{post.title}}</h1>
+						{%if post.subtitle %}<h2 {%if post.subtitle_color %}style="color: {{post.subtitle_color}}" {%endif%}>:: {{post.subtitle}} </h2>{% endif%}
+						{%if post.click_here_text %}<h3>{{post.click_here_text}} &gt;</h3>{% endif%}
+					</a>
+				</a>
+			</div>
+		{% endfor %}
+		</div>
+	{%endfor%}
+{% endblock %}

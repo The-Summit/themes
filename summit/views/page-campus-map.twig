@@ -1,0 +1,40 @@
+{% extends "base.twig" %}
+{% block content %}
+	{% for post in posts %}
+		<div class="page-campus-map content-nav-padding">
+			<section class="row">
+				<div class="col-xs-12 col-md-6">
+					<h1 class="col-md-offset-1 accent">{{post.title}}</h1>
+					<div class="col-md-offset-1">
+						<div class="col-md-10">
+							{{post.content|wpautop}}
+						</div>
+					</div>
+				</div>
+				<div class="campus-map col-xs-12 col-md-6 invisible" >
+					{% include "map.twig" %}
+				</div>
+			</section>
+		</div>
+	{% endfor %}
+	<div class="poptext">
+	{% for building in buildings %}
+		<span class="hidden" data-type="building" data-main_door="{{building.main_door}}" data-building="{{building.building_number}}" data-building_name="{{building.title}}">{%if building.main_door%}{{building.title}}'s main door is located at {{building.main_door}}.{%endif%}</span>
+	{% endfor %}
+	<h5 class="hidden" data-attach="partner">Onsite Partners</h5>
+	<ul>
+	{% for partner in partners %}
+	<li class="hidden" data-type="partner" data-building="{{partner.building.building_number}}" data-name="{{partner.title}}" data-href="{{partner.post_name}}" data-door="{{partner.door}}">{% if not partner.hidden %}<a href='/partners/#{{partner.post_name}}'>{% endif %}{{partner.title}}{%if partner.door %} (Door {{partner.door}}){%endif%}{% if not partner.hidden %}</a>{% endif %}</li>
+	{% endfor %}
+	</ul>
+	<h5 class="hidden" data-attach="property">Public Rental Spaces</h5>
+	<ul>
+	{% for property in properties %}
+		<li class="hidden" data-type="property" data-building="{{property.building.building_number}}" data-name="{{property.title}}" data-href="{{property.post_name}}" data-door="{{property.door}}">{% if not property.hidden %}<a href='/property/#{{property.post_name}}'>{% endif %}{{property.title}}{%if property.door %} (Door {{property.door}}){%endif%}{% if not property.hidden %}</a>{% endif %}</li>
+	{% endfor %}	
+	</ul>
+	</div>
+
+{% endblock %}
+{% block source %}page-campus-map.twig{% endblock %}
+{% block layout %}map{% endblock %}

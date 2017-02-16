@@ -1,0 +1,21 @@
+{% extends "base.twig" %}
+{% block source %}archive-default.twig{% endblock %}
+{% block layout %}grid{% endblock %}
+{% block content %}
+<div class="content-nav-padding">
+	<div class="row">
+		<h1 class="col-xs-10 leadertext offset15">
+			{% block description %}
+				**blank**
+			{% endblock %}
+		</h1>
+	</div>	
+	<div class="equal">
+		{% block postfilter %}
+			{% for post in posts if post.parent==0 %}
+				{% include ["pane-grid.twig"] %}
+			{% endfor %}
+		{% endblock %}
+	</div>
+</div>
+{% endblock %}
